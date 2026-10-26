@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import ScrollEffects from "@/components/layout/ScrollEffects";
 import "./globals.css";
+import PageLoader from "@/components/layout/PageLoader";
 
 export const metadata = {
   title: "Jaywant Group | One Group Endless Possibilities",
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <ScrollEffects />
+        <PageLoader />
         {children}
       </body>
     </html>

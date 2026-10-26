@@ -8,6 +8,7 @@ import AwardsRecognition from "@/components/home/AwardsRecognition";
 import Testimonials from "@/components/home/Testimonials";
 import FeaturedBlogs from "@/components/home/FeaturedBlogs";
 import Footer from "@/components/layout/Footer";
+import BusinessVerticals from "@/components/home/BusinessVerticals";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <OurLegacy />
         <FeaturedProjects />
         <OurFootprint />
+        <BusinessVerticals />
         <AwardsRecognition />
         <Testimonials />
         <FeaturedBlogs />
