@@ -184,7 +184,7 @@ export default function Header() {
             aria-label="Jaywant Group home"
           >
             <Image
-              src="/images/logo/jaywant-logo-whitbg.png"
+              src="/images/logo/jaywant-white-logo.png"
               alt="Jaywant Group — One Group Endless Possibilities"
               width={360}
               height={95}

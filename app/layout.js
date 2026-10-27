@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ScrollEffects from "@/components/layout/ScrollEffects";
 import "./globals.css";
 import PageLoader from "@/components/layout/PageLoader";
+import FloatingContact from "@/components/FloatingContact/FloatingContact";
 
 export const metadata = {
   title: "Jaywant Group | One Group Endless Possibilities",
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
         <ScrollEffects />
         <PageLoader />
         {children}
+        <FloatingContact />
       </body>
     </html>
   );

@@ -127,18 +127,19 @@ export default function Projects() {
 
               <p>
                 Discover our developments, shaped by thoughtful planning,
+                <br />
                 quality construction and a vision for lasting value.
               </p>
             </div>
 
-            <div className="jg-project-page-count">
+            {/* <div className="jg-project-page-count">
               <strong>{String(projects.length).padStart(2, "0")}</strong>
               <span>
                 PROJECTS
                 <br />
                 IN OUR PORTFOLIO
               </span>
-            </div>
+            </div> */}
           </div>
 
           <div className="jg-project-page-bottom-rule">

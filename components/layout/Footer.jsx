@@ -15,7 +15,7 @@ import {
 
 const quickLinks = [
   { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
+  { label: "About Us", href: "/about-us" },
   { label: "Projects", href: "/projects" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Social Events", href: "/social-events" },
@@ -24,7 +24,13 @@ const quickLinks = [
   { label: "NRI Corner", href: "/nri-corner" },
   { label: "Contact", href: "/contact" },
 ];
-
+const businessVerticals = [
+  { label: "Residential", href: "/business-verticals#residential" },
+  { label: "Commercial", href: "/business-verticals#commercial" },
+  { label: "Plotting", href: "/business-verticals#plotting" },
+  { label: "Industrial", href: "/business-verticals#industrial" },
+  { label: "Warehousing", href: "/business-verticals#warehousing" },
+];
 const branches = [
   { label: "India", href: "/contact" },
   { label: "U.A.E.", href: "/contact" },
@@ -39,10 +45,31 @@ export default function Footer() {
         <div className="jg-footer-image" aria-hidden="true" />
 
         <div className="jg-footer-container">
+          {/* Centered footer brand header */}
+          <div className="jg-footer-brand-header">
+            <Link href="/" className="jg-footer-top-logo">
+              <Image
+                src="/images/footer/jaywant-white-logo.png"
+                alt="Jaywant Group — One Group Endless Possibilities"
+                width={420}
+                height={105}
+                sizes="(max-width: 575px) 260px, 420px"
+                priority={false}
+              />
+            </Link>
+
+            <p className="jg-footer-brand-motto">
+              <span />
+              BUILDING A BRIGHTER TOMORROW
+              <span />
+            </p>
+          </div>
+
+          <div className="jg-footer-divider" />
           <div className="jg-footer-grid">
             {/* Brand */}
             <div className="jg-footer-brand">
-              <Link href="/" className="jg-footer-logo">
+              {/* <Link href="/" className="jg-footer-logo">
                 <Image
                   src="/images/footer/jaywant-logo-whitbg.png"
                   alt="Jaywant Group"
@@ -51,10 +78,10 @@ export default function Footer() {
                   sizes="(max-width: 767px) 220px, 280px"
                   style={{ width: "100%", height: "auto" }}
                 />
-              </Link>
+              </Link> */}
 
               <p className="jg-footer-tagline">
-                One Group. Endless Possibilities.
+                One Group. <span>Endless Possibilities.</span>
               </p>
 
               <p className="jg-footer-description">
@@ -91,7 +118,19 @@ export default function Footer() {
                 ))}
               </ul>
             </div>
+            {/* Business Verticals */}
+            <div className="jg-footer-column jg-footer-verticals">
+              <h3>Our Business Verticals</h3>
+              <span className="jg-footer-heading-line" />
 
+              <ul>
+                {businessVerticals.map((vertical) => (
+                  <li key={vertical.label}>
+                    <Link href={vertical.href}>{vertical.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
             {/* Global branches */}
             <div className="jg-footer-column">
               <h3>Global Branches</h3>
@@ -125,7 +164,7 @@ export default function Footer() {
                 Have a project or business enquiry? Connect with our team.
               </p>
 
-              <a
+              {/* <a
                 className="jg-footer-whatsapp"
                 href="https://wa.me/"
                 target="_blank"
@@ -133,7 +172,7 @@ export default function Footer() {
               >
                 <FaWhatsapp />
                 <span>Chat on WhatsApp</span>
-              </a>
+              </a> */}
             </div>
           </div>
         </div>

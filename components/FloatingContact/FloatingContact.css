@@ -1,0 +1,276 @@
+/* =====================================
+   JAYWANT GROUP — FLOATING CONTACT BAR
+===================================== */
+
+.jg-floating-contact {
+  position: fixed;
+  z-index: 1300;
+  top: 50%;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transform: translateY(-50%);
+}
+
+.jg-float-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 11px;
+  width: 54px;
+  min-height: 54px;
+  padding: 0 15px;
+  overflow: hidden;
+  color: #ffffff;
+  border: 0;
+  border-radius: 12px 0 0 12px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 5px 18px rgba(12, 24, 60, 0.2);
+  transition: width 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.jg-float-btn svg {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.8;
+}
+
+.jg-float-label {
+  font-family: var(--font-primary, "Poppins", sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.jg-float-call {
+  background: var(--jg-blue, #242f66);
+}
+
+.jg-float-enquiry {
+  background: var(--jg-orange, #ed701e);
+}
+
+.jg-float-whatsapp {
+  background: #168b51;
+}
+
+.jg-float-btn:hover {
+  width: 145px;
+  color: #ffffff;
+  transform: translateX(0);
+  box-shadow: 0 8px 24px rgba(12, 24, 60, 0.28);
+}
+
+.jg-float-btn:hover .jg-float-label,
+.jg-float-btn:focus-visible .jg-float-label {
+  opacity: 1;
+}
+
+/* Keyboard accessibility */
+.jg-float-btn:focus-visible,
+.jg-enquiry-close:focus-visible,
+.jg-enquiry-submit:focus-visible {
+  outline: 3px solid #ffb36f;
+  outline-offset: 3px;
+}
+
+/* =====================================
+   ENQUIRY MODAL
+===================================== */
+
+.jg-enquiry-backdrop {
+  position: fixed;
+  z-index: 1600;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+  background: rgba(9, 17, 43, 0.72);
+  backdrop-filter: blur(5px);
+}
+
+.jg-enquiry-modal {
+  position: relative;
+  width: min(100%, 490px);
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+  padding: 38px;
+  color: #242f66;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+  animation: jg-enquiry-enter 0.25s ease-out;
+}
+
+@keyframes jg-enquiry-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.jg-enquiry-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  color: #242f66;
+  background: #f1f3f8;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.jg-enquiry-eyebrow {
+  display: block;
+  margin-bottom: 10px;
+  color: #ed701e;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.jg-enquiry-modal h2 {
+  margin: 0 35px 10px 0;
+  color: #242f66;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(30px, 5vw, 40px);
+  font-weight: 500;
+}
+
+.jg-enquiry-modal > p {
+  margin: 0 0 24px;
+  color: #666d7d;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.jg-enquiry-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.jg-enquiry-modal form label {
+  margin-top: 7px;
+  color: #242f66;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.jg-enquiry-modal input,
+.jg-enquiry-modal select,
+.jg-enquiry-modal textarea {
+  width: 100%;
+  padding: 12px 13px;
+  color: #242f66;
+  background: #ffffff;
+  border: 1px solid #dfe3ec;
+  border-radius: 7px;
+  outline: none;
+  font: inherit;
+  font-size: 13px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.jg-enquiry-modal input:focus,
+.jg-enquiry-modal select:focus,
+.jg-enquiry-modal textarea:focus {
+  border-color: #ed701e;
+  box-shadow: 0 0 0 3px rgba(237, 112, 30, 0.1);
+}
+
+.jg-enquiry-modal textarea {
+  resize: vertical;
+}
+
+.jg-enquiry-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 14px 18px;
+  color: #ffffff;
+  background: #242f66;
+  border: 0;
+  border-radius: 7px;
+  font-family: var(--font-primary, "Poppins", sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.jg-enquiry-submit:hover {
+  background: #ed701e;
+}
+
+.jg-enquiry-modal form small {
+  margin-top: 5px;
+  color: #737985;
+  font-size: 10px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Mobile */
+@media (max-width: 575.98px) {
+  .jg-floating-contact {
+    right: 0;
+    gap: 8px;
+  }
+
+  .jg-float-btn {
+    width: 46px;
+    min-height: 46px;
+    gap: 9px;
+    padding: 0 11px;
+    border-radius: 10px 0 0 10px;
+  }
+
+  .jg-float-btn svg {
+    width: 23px;
+    height: 23px;
+    flex-basis: 23px;
+  }
+
+  .jg-float-btn:hover {
+    width: 125px;
+  }
+
+  .jg-float-label {
+    font-size: 11px;
+  }
+
+  .jg-enquiry-modal {
+    padding: 30px 22px 24px;
+    border-radius: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jg-float-btn,
+  .jg-float-label,
+  .jg-enquiry-modal {
+    animation: none;
+    transition: none;
+  }
+}

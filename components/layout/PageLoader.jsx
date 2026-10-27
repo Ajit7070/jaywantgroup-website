@@ -1,16 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 export default function PageLoader() {
   const pathname = usePathname();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const previousPathname = useRef(pathname);
 
   useEffect(() => {
+    // Show loader whenever the browser loads or refreshes the page.
+    setIsLoading(true);
+
+    const hideTimer = window.setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
     const handleLinkClick = (event) => {
-      // Only handle normal left-click navigation.
       if (
         event.defaultPrevented ||
         event.button !== 0 ||
@@ -22,7 +29,10 @@ export default function PageLoader() {
         return;
       }
 
-      const link = event.target.closest("a[href]");
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+
+      const link = target.closest("a[href]");
 
       if (!link || link.target === "_blank" || link.hasAttribute("download")) {
         return;
@@ -30,7 +40,6 @@ export default function PageLoader() {
 
       const url = new URL(link.href, window.location.href);
 
-      // Ignore external links and non-web protocols.
       if (
         url.origin !== window.location.origin ||
         !["http:", "https:"].includes(url.protocol)
@@ -38,12 +47,10 @@ export default function PageLoader() {
         return;
       }
 
-      // Ignore links that only navigate to a section on this page.
-      const samePage =
-        url.pathname === window.location.pathname &&
-        url.search === window.location.search;
-
-      if (samePage) return;
+      // Ignore same-page links, including section anchors.
+      if (url.pathname === window.location.pathname) {
+        return;
+      }
 
       setIsLoading(true);
     };
@@ -51,20 +58,20 @@ export default function PageLoader() {
     document.addEventListener("click", handleLinkClick, true);
 
     return () => {
+      window.clearTimeout(hideTimer);
       document.removeEventListener("click", handleLinkClick, true);
     };
   }, []);
 
+  // Show the loader after the pathname changes.
   useEffect(() => {
-    if (!isLoading) return;
+    if (!pathname) return;
 
-    // Allow the new route to render before hiding the loader.
-    const timer = window.setTimeout(() => {
+    if (previousPathname.current !== pathname) {
+      previousPathname.current = pathname;
       setIsLoading(false);
-    }, 500);
-
-    return () => window.clearTimeout(timer);
-  }, [pathname, isLoading]);
+    }
+  }, [pathname]);
 
   if (!isLoading) return null;
 
