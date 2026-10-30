@@ -97,16 +97,32 @@ const projects = [
   },
 ];
 
-const filters = ["All Projects", "Ongoing", "Completed"];
+const categories = [
+  "All",
+  "Residential",
+  "Commercial",
+  "Plotting",
+  "Industrial",
+  "Warehousing",
+];
+
+const statuses = ["All", "Upcoming", "Ongoing", "Completed"];
 
 export default function Projects() {
-  const [activeFilter, setActiveFilter] = useState("All Projects");
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeStatus, setActiveStatus] = useState("All");
 
   const filteredProjects = useMemo(() => {
-    if (activeFilter === "All Projects") return projects;
+    return projects.filter((project) => {
+      const matchesCategory =
+        activeCategory === "All" || project.category === activeCategory;
 
-    return projects.filter((project) => project.status === activeFilter);
-  }, [activeFilter]);
+      const matchesStatus =
+        activeStatus === "All" || project.status === activeStatus;
+
+      return matchesCategory && matchesStatus;
+    });
+  }, [activeCategory, activeStatus]);
 
   return (
     <main className="jg-project-page">
@@ -167,26 +183,68 @@ export default function Projects() {
             </p>
           </div>
 
-          <div className="jg-project-filters" aria-label="Filter projects">
-            {filters.map((filter) => (
-              <button
-                key={filter}
-                type="button"
-                className={`jg-project-filter ${
-                  activeFilter === filter ? "is-active" : ""
-                }`}
-                onClick={() => setActiveFilter(filter)}
-                aria-pressed={activeFilter === filter}
-              >
-                {filter}
-                {activeFilter === filter && (
-                  <span className="jg-project-filter-count">
-                    {filteredProjects.length}
-                  </span>
-                )}
-              </button>
-            ))}
+          <div className="jg-project-filter-bar">
+            <div
+              className="jg-project-category-filters"
+              aria-label="Filter by project category"
+            >
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  type="button"
+                  className={`jg-project-category-filter ${
+                    activeCategory === category ? "is-active" : ""
+                  }`}
+                  onClick={() => setActiveCategory(category)}
+                  aria-pressed={activeCategory === category}
+                >
+                  {category === "All" && (
+                    <span className="jg-filter-check" aria-hidden="true">
+                      ✓
+                    </span>
+                  )}
+                  {category}
+                </button>
+              ))}
+            </div>
+
+            <div
+              className="jg-project-status-filters"
+              aria-label="Filter by project status"
+            >
+              {statuses.map((status) => (
+                <button
+                  key={status}
+                  type="button"
+                  className={`jg-project-status-filter ${
+                    activeStatus === status ? "is-active" : ""
+                  }`}
+                  onClick={() => setActiveStatus(status)}
+                  aria-pressed={activeStatus === status}
+                >
+                  {status}
+                </button>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className="jg-project-filter-reset"
+              onClick={() => {
+                setActiveCategory("All");
+                setActiveStatus("All");
+              }}
+              aria-label="Reset all project filters"
+            >
+              <span aria-hidden="true">×</span>
+              Reset
+            </button>
           </div>
+
+          <p className="jg-project-results-count" aria-live="polite">
+            Showing <strong>{filteredProjects.length}</strong>{" "}
+            {filteredProjects.length === 1 ? "project" : "projects"}
+          </p>
 
           <div className="jg-projects-grid jg-all-projects-grid">
             {filteredProjects.map((project, index) => (
@@ -276,7 +334,10 @@ export default function Projects() {
               <p>Explore all projects to see our portfolio.</p>
               <button
                 type="button"
-                onClick={() => setActiveFilter("All Projects")}
+                onClick={() => {
+                  setActiveCategory("All");
+                  setActiveStatus("All");
+                }}
               >
                 View all projects
               </button>
