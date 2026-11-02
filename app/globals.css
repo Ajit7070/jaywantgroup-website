@@ -467,7 +467,19 @@ a {
   padding: 30px clamp(28px, 8vw, 130px) 24px;
   color: #ffffff;
   /* background: #202b60; */
-  background: var(--jg-blue);
+  background-color: var(--jg-blue);
+  background-image: linear-gradient(
+      90deg,
+      rgba(36, 47, 102, 0.2) 0%,
+      rgba(25, 38, 87, 0.35) 55%,
+      rgba(20, 31, 75, 0.45) 100%
+    ),
+    url("/images/header/hamburger-menu-bg.png");
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  /* background: var(--jg-blue); */
   visibility: hidden;
   opacity: 0;
   clip-path: inset(0 0 100% 0);
